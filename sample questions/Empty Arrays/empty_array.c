@@ -53,14 +53,10 @@ int main()
     int *a = (int *)malloc(size * sizeof(int));
     int *b = (int *)malloc(size * sizeof(int));
 
-    printf("\n");
-
     for (int i = 0; i < size; i++)
     {
         scanf("%d", &a[i]);
     }
-
-    printf("\n");
 
     for (int i = 0; i < size; i++)
     {
@@ -70,31 +66,20 @@ int main()
     int i = 0;
     while (size > 0)
     {
-
-        // printf("hai hai here here");
         if (a[i] == b[i])
         {
-            // printf("\nhere here\n");
             a = deleteFirstElement(a, size);
             b = deleteFirstElement(b, size);
-            // printf("\nnow a is\n");
-            printArray(a, size);
-            // printf("\nnow b is\n");
-            printArray(b, size);
-
             size--;
             operation_count++;
         }
         else if (a[i] != b[i])
         {
-            // printf("bow bow");
             rotateLeft(a, size);
-            // printf("\nnow a is\n");
-            printArray(a, size);
             operation_count++;
         }
     }
 
-    printf("\nTotal operations is %d\n", operation_count);
+    printf("%d", operation_count);
     return 0;
 }
