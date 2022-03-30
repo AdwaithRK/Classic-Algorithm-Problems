@@ -38,3 +38,8 @@ Perform operation 1 to make a = 3, 1
 Now perform operation 2 to make a = 1 and b =  1
 
 Now perform operation 2 to make a = {} and b =  {}
+
+
+`link to question`: https://www.hackerearth.com/practice/data-structures/queues/basics-of-queues/practice-problems/algorithm/empty-array-31ed638c/
+
+
