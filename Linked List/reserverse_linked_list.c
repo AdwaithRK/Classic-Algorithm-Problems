@@ -32,10 +32,30 @@ void traverse(struct link *traverse)
 {
     while (traverse != NULL)
     {
-        printf("%d\n", traverse->data);
+        printf("%d\t", traverse->data);
         traverse = traverse->p;
     }
+    printf("\n");
 };
+
+struct link *reverse(struct link *head)
+{
+
+    struct link *previous = NULL;
+    struct link *current = head;
+    struct link *next = head->p;
+
+    while (current != NULL)
+    {
+        current->p = previous;
+        previous = current;
+        current = next;
+        if (next != NULL)
+            next = next->p;
+    }
+
+    return previous;
+}
 
 int main()
 {
@@ -43,5 +63,9 @@ int main()
     printf("Enter the number of nodes you want\n");
     scanf("%d", &n);
     struct link *head = create_list(n);
+    // printf("\n");
     traverse(head);
+    struct link *reversed_list = reverse(head);
+
+    traverse(reversed_list);
 }
