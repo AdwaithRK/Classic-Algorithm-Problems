@@ -8,7 +8,7 @@ bool subSetSumRecursive(vector<int> arr, int sum, int index)
     if (sum == 0)
         return true;
 
-    if (arr[index] < sum)
+    if (arr[index] <= sum)
         return subSetSumRecursive(arr, sum - arr[index], index - 1) || subSetSumRecursive(arr, sum, index - 1);
 
     return subSetSumRecursive(arr, sum, index - 1);
@@ -21,10 +21,12 @@ bool equalSumPartition(vector<int> arr)
     {
         sum += arr[i];
     }
-    cout << "Sum : " << sum;
+    // cout << "Sum : " << sum;
 
     if (sum % 2 != 0)
         return false;
+
+    return subSetSumRecursive(arr, sum / 2, arr.size() - 1);
 }
 
 int main()
@@ -36,7 +38,9 @@ int main()
                        5};
     // int size = sizeof(arr) / sizeof(arr[0]);
 
-    equalSumPartition(arr);
+    cout << equalSumPartition(arr);
+
+    // cout << "sub set sum : " << subSetSumRecursive(arr, 6, 3) << "\n";
 
     return 0;
 }
