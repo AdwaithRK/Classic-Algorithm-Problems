@@ -62,8 +62,8 @@ bool subSetSumBottomUp(int set[], int n, int sum)
 
 int main()
 {
-    int set[] = {3, 34, 4, 12, 5, 2};
-    int sum = 16;
+        int set[] = {3, 34, 4, 12, 5, 2};
+        int sum = 16;
     int n = sizeof(set) / sizeof(set[0]);
 
     cout << subSetSum(set, n, sum) << "\n";
