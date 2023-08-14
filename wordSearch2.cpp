@@ -54,21 +54,28 @@ class Solution
 
     TrieNode *root;
 
-    void backTracking(int row, int col, TrieNode *root, vector<vector<char>> &board, string word)
+    void backTracking(int row, int col, TrieNode *root, vector<vector<char>> &board, string word, vector<vector<bool>> visited_board)
     {
+
+        // cout << "row : " << row << " col :" << col << "\n\n";
 
         if (row < 0 || col < 0)
             return;
 
-        if (row >= board.size() || row >= board[0].size())
+        if (row >= board.size() || col >= board[0].size())
+            return;
+
+        if (visited_board[row][col])
             return;
 
         insertWord(root, word + board[row][col]);
 
-        backTracking(row + 1, col, root, board, word + board[row][col]);
-        backTracking(row, col + 1, root, board, word + board[row][col]);
-        backTracking(row, col + 1, root, board, word + board[row][col]);
-        backTracking(row, col + 1, root, board, word + board[row][col]);
+        visited_board[row][col] = true;
+        backTracking(row + 1, col, root, board, word + board[row][col], visited_board);
+        backTracking(row - 1, col, root, board, word + board[row][col], visited_board);
+        backTracking(row, col + 1, root, board, word + board[row][col], visited_board);
+        backTracking(row, col - 1, root, board, word + board[row][col], visited_board);
+        visited_board[row][col] = false;
     }
 
 public:
@@ -77,10 +84,28 @@ public:
 
         root = getNode();
 
-        string word = "";
-        backTracking(0, 0, root, board, word);
+        vector<string> result;
 
-        return {"adwaith"};
+        string word = "";
+
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                vector<vector<bool>> visited_board(board.size(), vector<bool>(board[0].size(), false));
+                backTracking(i, j, root, board, word, visited_board);
+            }
+        }
+
+        for (int i = 0; i < words.size(); i++)
+        {
+            if (searchWord(root, words[i]))
+            {
+                result.push_back(words[i]);
+            }
+        }
+
+        return result;
     }
 };
 
@@ -89,10 +114,15 @@ int main(int argc, const char **argv)
 
     Solution A;
 
+    // vector<string> result;
+
     vector<vector<char>> board = {{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}};
     vector<string> words = {"oath", "pea", "eat", "rain"};
 
-    A.findWords(board, words);
+    vector<string> result = A.findWords(board, words);
+
+    for (auto k : result)
+        cout << k << "\n";
 
     return 0;
 }
