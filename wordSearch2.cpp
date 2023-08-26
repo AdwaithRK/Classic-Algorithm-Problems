@@ -49,10 +49,26 @@ bool searchWord(TrieNode *root, string word)
     return pCrawler->isEndOfWord;
 }
 
+bool isPrefix(TrieNode *root, string word)
+{
+    TrieNode *pCrawler = root;
+
+    for (int i = 0; i < word.size(); i++)
+    {
+        if (pCrawler->alphabets[word[i]] == NULL)
+            return false;
+
+        pCrawler = pCrawler->alphabets[word[i]];
+    }
+
+    return true;
+}
+
 class Solution
 {
 
     TrieNode *root;
+    vector<string> result;
 
     void backTracking(int row, int col, TrieNode *root, vector<vector<char>> &board, string word, vector<vector<bool>> visited_board)
     {
@@ -68,7 +84,9 @@ class Solution
         if (visited_board[row][col])
             return;
 
-        insertWord(root, word + board[row][col]);
+        if (!isPrefix(root, word + board[row][col])) return; 
+
+        if(searchWord(root, word + board[row][col]))result.push_back(word + board[row][col]);
 
         visited_board[row][col] = true;
         backTracking(row + 1, col, root, board, word + board[row][col], visited_board);
@@ -84,9 +102,16 @@ public:
 
         root = getNode();
 
-        vector<string> result;
 
         string word = "";
+
+
+        for (int i = 0; i < words.size(); i++)
+        {
+            insertWord(root, words[i]);
+        }
+
+
 
         for (int i = 0; i < board.size(); i++)
         {
@@ -94,14 +119,6 @@ public:
             {
                 vector<vector<bool>> visited_board(board.size(), vector<bool>(board[0].size(), false));
                 backTracking(i, j, root, board, word, visited_board);
-            }
-        }
-
-        for (int i = 0; i < words.size(); i++)
-        {
-            if (searchWord(root, words[i]))
-            {
-                result.push_back(words[i]);
             }
         }
 
