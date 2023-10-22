@@ -9,8 +9,8 @@ int value(int i, int j, vector<int> ele)
     if (i > j)
         return 0;
 
-    int first = ele[i] + max(value(i + 2, j, ele), value(i + 1, j - 1, ele));
-    int second = ele[j] + max(value(i + 1, j - 1, ele), value(i, j - 2, ele));
+    int first = ele[i] + min(value(i + 2, j, ele), value(i + 1, j - 1, ele));
+    int second = ele[j] + min(value(i + 1, j - 1, ele), value(i, j - 2, ele));
 
     cout << "first : " << first << "second : " << second << "\n";
 
@@ -20,7 +20,7 @@ int value(int i, int j, vector<int> ele)
 int main()
 {
 
-    vector<int> ele = {5, 10, 8, 11, 6, 2, 3};
+    vector<int> ele = {1, 4, 2, 8, 3, 6};
 
     int result = value(0, ele.size() - 1, ele);
 
