@@ -8,8 +8,7 @@ int solve(int p, int q){
     return 1;
   int op1 = 100001, op2 =100001;
   if(q%2==0) op1 = 1+solve(p,q/2);
-  int root = sqrt(q);
-  if(root*root==q) op2 = 1 + solve(p,root);
+  if(sqrt(q)*sqrt(q)==q) op2 = 1 + solve(p,sqrt(q));
   int res = min(op1, op2);
   return res;
 }
