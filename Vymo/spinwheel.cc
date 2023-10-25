@@ -4,9 +4,9 @@ using namespace std;
 
 int main()
 {
-    int n = 10;
+    //int n = 10;
 
-    vector<string> ans = {"712", "246", "365", "312"};
+    vector<string> ans = {"137", "364", "115", "724"};
 
     vector<vector<int>> DP(ans.size(), vector<int>(ans[0].size(), 0));
 
@@ -18,17 +18,18 @@ int main()
         }
     }
 
-
-    for(int i = 0; i < ans.size(); i++){
+    for (int i = 0; i < ans.size(); i++)
+    {
         sort(DP[i].begin(), DP[i].end(), greater<int>());
     }
 
-
     int sum = 0;
 
-    for(int j = 0; j < DP[0].size(); j++){
+    for (int j = 0; j < DP[0].size(); j++)
+    {
         int maxV = 0;
-        for(int i = 0; i < DP.size(); i++){
+        for (int i = 0; i < DP.size(); i++)
+        {
             maxV = max(maxV, DP[i][j]);
         }
         sum += maxV;
