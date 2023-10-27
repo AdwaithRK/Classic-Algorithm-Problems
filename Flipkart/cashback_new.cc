@@ -5,13 +5,12 @@ using namespace std;
 
 int cashBack(int p, int q){
 
-    if(p > q) return -1;
 
     if(p == q) return 0;
 
     if(q == 0) return 1;
     if(q == 1) return 1;
-    if(p == q) return 0;
+    if(p > q) return -1;
 
     int a = INT_MAX, b = INT_MAX;
 
